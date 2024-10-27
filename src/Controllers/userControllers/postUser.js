@@ -18,7 +18,7 @@ const postUser = async ( nick, email, password,avatar,age,country,chips ) => {
         //         option: "signIn"
         //     });
         // }
-                   console.log(newUser);
+                   
         return  newUser.dataValues
 
     } catch (error) {
