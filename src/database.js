@@ -88,9 +88,7 @@ const modelDefiners = [];
 fs.readdirSync(path.join(__dirname, '/models'))
   .filter((file) => (file.indexOf('.') !== 0) && (file !== basename) && (file.slice(-3) === '.js'))
   .forEach((file) => {
-      const model = require(path.join(__dirname, '/models', file));
-      console.log(`Cargando modelo: ${file}`); // Añade esta línea para depurar
-      modelDefiners.push(model);
+    modelDefiners.push(require(path.join(__dirname, '/models', file)));
   });
 
 
