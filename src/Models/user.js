@@ -57,5 +57,5 @@ module.exports = (sequelize)  => {
           User.belongsToMany(models.Game, { foreignKey: 'UserFavGames' })
     
       }
-      return User //relacion con avatar
+      return User //relacion con avatar 
     }
