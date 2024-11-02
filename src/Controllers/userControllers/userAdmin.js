@@ -2,6 +2,7 @@ const { User } = require('../../database');
 
 const userAdmin = async (id) => {
     try {
+        console.log(id);
         const userToUpdate = await User.findByPk(id);
 
         if (!userToUpdate) {
