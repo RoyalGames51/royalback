@@ -12,7 +12,7 @@ const server = express();
 
 server.use(morgan("dev"));
 server.use(express.json());
-server.use(cors({origin: 'https://www.royalgames.me/'}));
+server.use(cors({ origin: 'https://www.royalgames.me' }));;
 server.use(bodyParser.json()); 
 
 
