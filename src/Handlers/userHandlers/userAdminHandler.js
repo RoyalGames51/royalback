@@ -1,7 +1,7 @@
 const userAdmin = require('../../Controllers/userControllers/userAdmin');
 
 module.exports = async (req, res) => {
-    const { id} = req.params;
+    const  id = req.params;
     
     
     try {
