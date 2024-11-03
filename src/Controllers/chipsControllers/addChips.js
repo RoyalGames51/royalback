@@ -1,17 +1,20 @@
 const { User } = require('../../database');
 
-const addChips = async (id, newData) => {
+const addChips = async (id, newChips) => {
     try {
         const userToUpdate = await User.findByPk(id);
       
         if (!userToUpdate) {
             throw new Error("Usuario inexistente");
         }
-      
-        await userToUpdate.update(newData);
+
+        // Suma las nuevas fichas a las fichas actuales del usuario
+        const updatedChips = userToUpdate.chips + newChips;
+
+        // Actualiza el campo de fichas
+        await userToUpdate.update({ chips: updatedChips });
         await userToUpdate.reload();
 
-       
         return {
             message: 'Usuario actualizado',
             userToUpdate
@@ -21,4 +24,4 @@ const addChips = async (id, newData) => {
     }
 };
 
-module.exports = updateUser;
+module.exports = addChips;

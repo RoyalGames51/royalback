@@ -8,6 +8,9 @@ const getUserByEmailHandler = require('../Handlers/userHandlers/getUserByEmailHa
 const userAdminHandler = require('../Handlers/userHandlers/userAdminHandler')
 
 
+const addChipsHandler = require('../Handlers/chipsHandlers/addChipsHandler');
+
+
 
 
 router.post('/user/create', postUserHandler);
@@ -15,5 +18,8 @@ router.delete('/user', deleteUserHandler);
 router.put('/userAdmin',userAdminHandler)
 
 router.get('/user/email', getUserByEmailHandler);
+
+
+router.put('/add/chips',addChipsHandler)
 
 module.exports= router;

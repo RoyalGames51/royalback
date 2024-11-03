@@ -1,11 +1,11 @@
 const addChips = require('../../Controllers/chipsControllers/addChips');
 
 module.exports = async (req, res) => {
-    const { nick } = req.body;
+    const { id } = req.body;
     const { newChips } = req.body;
     
     try {
-        const updChips = await addChips(nick, newChips);
+        const updChips = await addChips(id, newChips);
 
         res.status(200).json(updChips);
     } catch (error) {
