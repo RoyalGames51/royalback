@@ -14,12 +14,12 @@ module.exports = (sequelize) => {
             allowNull: true
         },
         price: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.STRING,
             allowNull: false
 
         },
         chips: {
-            type: DataTypes.NUMBER,
+            type: DataTypes.STRING,
             allowNull: false
         },
         date: {
