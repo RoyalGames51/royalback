@@ -40,7 +40,7 @@ module.exports = (sequelize)  => {
             allowNull: true
         },
         chips:{
-            type: DataTypes.STRING,
+            type: DataTypes.INTEGER,
             allowNull: false,
             defaultValue: 0
         },
