@@ -2,7 +2,7 @@ const { User,Game } = require('../../database');
 
 module.exports = async(email)=>{
     try{
-        const usuario = User.findOne({
+        const usuario = await User.findOne({
             where:{email: email},
             include: [{
                 model: Game,
