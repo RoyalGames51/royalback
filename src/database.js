@@ -45,7 +45,7 @@ sequelize.models = Object.fromEntries(capsEntries);
 
 const { User, Game, Pay} = sequelize.models;
 Pay.belongsTo(User,{through: "UserPays"});
-User.hasMany(Pay,{through: "UserPays"});
+User.belongsToMany(Pay,{through: "UserPays"});
 
 
 User.belongsToMany(Game, { through: 'UserFavGames' });
