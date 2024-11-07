@@ -2,6 +2,7 @@ const getUserByEmail = require('../../Controllers/userControllers/getUserByEmail
 
 module.exports = async (req, res) => {
     try {
+        console.log("llega acaaaa");
         const { email } = req.body;
         console.log("mailhanlder",email);
         const usuario = await getUserByEmail(email);
