@@ -10,6 +10,7 @@ const userAdminHandler = require('../Handlers/userHandlers/userAdminHandler')
 
 
 const addChipsHandler = require('../Handlers/chipsHandlers/addChipsHandler');
+const { receiveWebhook } = require('../Controllers/MPcontrollers/paymentControl');
 
 
 
@@ -23,5 +24,9 @@ router.get('/user/email', getUserByEmailHandler);
 
 
 router.put('/add/chips',addChipsHandler)
+
+
+//MERCADOPAGO
+router.post('/mepago/webhook', receiveWebhook);
 
 module.exports= router;

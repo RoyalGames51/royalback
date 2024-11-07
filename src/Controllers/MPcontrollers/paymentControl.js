@@ -6,8 +6,8 @@ const { User } = require("../../database");
 // const postTrip = require("../tripsControllers/postTrip");
 // const {postTrip} = require('../../controllers/tripsControllers/postTrip');
 dotenv.config();
-const getUserById = require('../../controllers/usersControllers/getUserById');
-const sendMailHandler = require("../../utils/mailing/sendMailHandler")
+const getUserById =require('../userControllers/getUserbyId')
+// const sendMailHandler = require("../../utils/mailing/sendMailHandler")
 
 
 
@@ -21,27 +21,23 @@ const createOrder = async (req, res) => {
   const {
     userId,
     
-    price,viaje,driverId, destination,quantityPassengers,date,origin, hour} = req.body
+    price,chips} = req.body
  
   try {
     let preference = {
 
       metadata: { userId: userId,
-        origin: origin,
-        destination:  destination,
-        date: date,
-        hour:  hour,
-        quantityPassengers:quantityPassengers,
-        driverId: null,
+        
+        chips:chips,
         price:  price },
 
 
 
        items: [
         {
-          title: viaje,
+          title: fichas,
           unit_price: price,
-          currency_id: "PEN",
+          currency_id: "ARS",
           quantity: 1,
           //  description: product.quantityPassengers, 
           // picture_url: "",
@@ -53,7 +49,7 @@ const createOrder = async (req, res) => {
          
       },
 
-      notification_url: "https://vamosappserver.onrender.com/mepago/webhook",
+      notification_url: "https://royalback-du3v.onrender.com/mepago/webhook",
 
 
       auto_return: "all"
@@ -87,12 +83,8 @@ const receiveWebhook = async (req, res) => {
      
       const trip ={
         userId: data.body.metadata.user_id,
-        origin: data.body.metadata.origin,
-        destination:  data.body.metadata.destination,
-        date: data.body.metadata.date,
-        hour: data.body.metadata.hour,
-        quantityPassengers:data.body.metadata.quantity_passengers,
-        driverId: null,
+        chips: data.body.metadata.chips,
+       
         price:  data.body.metadata.price
       }
     
