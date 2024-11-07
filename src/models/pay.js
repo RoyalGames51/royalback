@@ -22,11 +22,17 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: false
         },
+        userId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
         date: {
             type: DataTypes.STRING
         }
     }, {
         freezeTableName: true,
         timestamps: false
-    });
+    })
+    Pay.associate = (models) => {
+        Pay.belongsTo(models.User, { foreignKey: 'userId' });};
 };

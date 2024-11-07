@@ -11,13 +11,17 @@ module.exports = (sequelize) => {
         name: {
             type: DataTypes.STRING,
             allowNull: false
-        }
+        },
+        userId: {
+            type: DataTypes.STRING,
+            allowNull: false
+        },
     },
     { timestamps: false });
 
     Game.associate = (models) => {
         
-        Game.belongsToMany(models.User, { foreignKey: 'UserFavGames' })
+        Game.belongsToMany(models.User, { foreignKey: 'userId' })
   
     }
     return Game //relacion con avatar

@@ -54,7 +54,8 @@ module.exports = (sequelize)  => {
 
          User.associate = (models) => {
         
-          User.belongsToMany(models.Game, { foreignKey: 'UserFavGames' })
+          User.belongsToMany(models.Game, { foreignKey: 'userId' })
+          User.hasMany(models.Pay, { foreignKey: 'userId' })
     
       }
       return User //relacion con avatar 
