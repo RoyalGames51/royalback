@@ -3,7 +3,7 @@ const getUserByNick = require('../../Controllers/userControllers/getUserByNick')
 module.exports = async (req, res) => {
     try {
         const { nick } = req.query;
-        const usuario = await getUserByEmail(nick);
+        const usuario = await getUserByNick(nick);
 
         res.status(200).json(usuario);
     } catch (error) {
