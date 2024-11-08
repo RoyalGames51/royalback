@@ -17,13 +17,13 @@ const getUserByNickHandler = require('../Handlers/userHandlers/getUserByNickHand
 
 
 
-router.post('/user/create', postUserHandler);
+router.post('/user-create', postUserHandler);
 router.delete('/user', deleteUserHandler);
 router.put('/userAdmin',userAdminHandler)
 router.get('/user/:id', getUserByIdHandler);
 
-router.get('/user/email', getUserByEmailHandler);
-router.get('/user/nick',getUserByNickHandler)
+router.get('/user-email', getUserByEmailHandler);
+router.get('/user-nick',getUserByNickHandler)
 
 
 
