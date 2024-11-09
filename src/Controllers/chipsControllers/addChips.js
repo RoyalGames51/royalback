@@ -12,7 +12,7 @@ const addChips = async (id, newChips) => {
             throw new Error("El valor de fichas proporcionado no es un número válido");
         }
         // Suma las nuevas fichas a las fichas actuales del usuario
-        const updatedChips = userToUpdate.chips + newChips;
+        const updatedChips = userToUpdate.chips + chipsToAdd;
 
         // Actualiza el campo de fichas
         await userToUpdate.update({ chips: updatedChips });
