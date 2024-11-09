@@ -24,7 +24,7 @@ const inactiveUserHandler = require('../Handlers/userHandlers/inactiveUserHandle
 router.get('/getUsers',getAllUserHandler);
 router.put('/actualizar-usuario',updateUserHandler);
 router.post('/user-create', postUserHandler);
-router.delete('/user', deleteUserHandler);
+router.delete('/user-delete', deleteUserHandler);
 router.put('/userAdmin',userAdminHandler);
 router.get('/user/:id', getUserByIdHandler);
 router.put('/user-ban',banUserHandler);
