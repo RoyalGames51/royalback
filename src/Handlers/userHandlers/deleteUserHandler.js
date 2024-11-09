@@ -2,7 +2,7 @@ const deleteUser = require('../../Controllers/userControllers/deleteUser');
 
 module.exports = async (req, res) => {
     try {
-        const { id } = req.query;
+        const { id } = req.params;
         const deletedUs = await deleteUser(id);
 
         if (deletedUs)
