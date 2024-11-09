@@ -13,6 +13,7 @@ const userAdminHandler = require('../Handlers/userHandlers/userAdminHandler')
 const addChipsHandler = require('../Handlers/chipsHandlers/addChipsHandler');
 // const { receiveWebhook } = require('../Controllers/MPcontrollers/paymentControl');
 const getUserByNickHandler = require('../Handlers/userHandlers/getUserByNickHandler');
+const postPayHandler = require('../Handlers/PayHandlers/postPayHandler');
 
 
 
@@ -33,5 +34,9 @@ router.put('/add/chips',addChipsHandler)
 
 //MERCADOPAGO
 //  router.post('/mepago/webhook', receiveWebhook);
+
+
+//Pay
+router.post('/newpay',postPayHandler)
 
 module.exports= router;
