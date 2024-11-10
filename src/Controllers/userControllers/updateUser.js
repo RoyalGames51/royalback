@@ -7,16 +7,17 @@ const updateUser = async (id, newData) => {
         if (!userToUpdate) {
             throw new Error("Usuario inexistente");
         }
-      
-        await userToUpdate.update(newData);
-        await userToUpdate.reload();
 
-       
+        // Actualiza solo los campos presentes en `newData`
+        await userToUpdate.update(Object.assign({}, userToUpdate.toJSON(), newData));
+        
+        // No necesitas `reload()` a menos que necesites confirmar los cambios
         return {
             message: 'Usuario actualizado',
-            userToUpdate
+            user: userToUpdate
         };
     } catch (error) {
+        console.error(`Error en updateUser:`, error);
         throw new Error(`Error al actualizar usuario: ${error.message}`);
     }
 };
