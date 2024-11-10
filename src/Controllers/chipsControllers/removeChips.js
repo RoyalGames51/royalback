@@ -7,7 +7,7 @@ const removeChips = async (id, removeChip) => {
         if (!userToUpdate) {
             throw new Error("Usuario inexistente");
         }
-        const chipsToRemove = Number(newChips);
+        const chipsToRemove = Number(removeChip);
         if (isNaN(chipsToRemove)) {
             throw new Error("El valor de fichas proporcionado no es un número válido");
         }
