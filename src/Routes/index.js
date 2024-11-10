@@ -22,7 +22,7 @@ const inactiveUserHandler = require('../Handlers/userHandlers/inactiveUserHandle
 
 
 router.get('/getUsers',getAllUserHandler);
-router.put('/actualizar-usuario',updateUserHandler);
+router.put('/actualizar-usuario/:id',updateUserHandler);
 router.post('/user-create', postUserHandler);
 router.delete('/user-delete/:id', deleteUserHandler);
 router.put('/userAdmin',userAdminHandler);
