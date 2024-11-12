@@ -4,7 +4,7 @@ const { User } = require("../../database")
 const postUser = async ( nick, email, password,avatar,age,country,chips ) => {
     
     try {
-     console.log(nick,email);
+     
         const [newUser, created] = await User.findOrCreate({
             where: { email },
             defaults: { nick, email, password,age,avatar,country,chips }
