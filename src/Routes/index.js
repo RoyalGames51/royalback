@@ -19,6 +19,7 @@ const updateUserHandler = require('../Handlers/userHandlers/updateUserHandler');
 const getAllUserHandler = require('../Handlers/userHandlers/getAllUserHandler');
 const banUserHandler = require('../Handlers/userHandlers/banUserHandler');
 const inactiveUserHandler = require('../Handlers/userHandlers/inactiveUserHandler');
+const firstChipsHandler = require('../Handlers/userHandlers/firstChipsHandler');
 
 
 router.get('/getUsers',getAllUserHandler);
@@ -28,6 +29,7 @@ router.delete('/user-delete/:id', deleteUserHandler);
 router.put('/userAdmin',userAdminHandler);
 router.get('/user/:id', getUserByIdHandler);
 router.put('/user-ban',banUserHandler);
+router.put('/firstchips',firstChipsHandler)
 
 router.get('/user-email', getUserByEmailHandler);
 router.get('/user-nick',getUserByNickHandler)
