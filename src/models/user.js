@@ -47,6 +47,10 @@ module.exports = (sequelize)  => {
        password: {
            type:DataTypes.STRING,
            allowNull: false
+       },
+       firstChips:{
+        type: DataTypes.BOOLEAN,
+        defaultValue: false
        }
   },
        { timestamps: false });

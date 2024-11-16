@@ -29,7 +29,7 @@ router.delete('/user-delete/:id', deleteUserHandler);
 router.put('/userAdmin',userAdminHandler);
 router.get('/user/:id', getUserByIdHandler);
 router.put('/user-ban',banUserHandler);
-// router.put('/firstchips',firstChipsHandler)
+router.put('/firstchips',firstChipsHandler)
 
 router.get('/user-email', getUserByEmailHandler);
 router.get('/user-nick',getUserByNickHandler)
