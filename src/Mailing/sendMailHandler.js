@@ -1,10 +1,8 @@
 const mailing = require('./mailing');
-const {getTripById} = require('../../controllers/tripsControllers/getTripById');
-const getDriverById = require('../../controllers/driversControllers/getDriverById');
-const getAdminEmails = require('../../controllers/adminControllers/getAdminEmails');
 
 
-module.exports=async({id, nick, email, option})=>{
+
+module.exports=async({ nick, email, option})=>{
 
     try {
     
