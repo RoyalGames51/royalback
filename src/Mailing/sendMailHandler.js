@@ -3,6 +3,7 @@ const mailing = require('./mailing');
 
 
 module.exports=async({ nick, email, option})=>{
+console.log(nick,email,option,"llegaka");
 
     try {
     
