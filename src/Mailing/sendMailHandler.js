@@ -7,6 +7,8 @@ console.log(nick,email,option,"llegaka");
 
     try {
     let userName=nick
+    console.log("username", userName);
+    
         let preSubject="";
         let message="";
 

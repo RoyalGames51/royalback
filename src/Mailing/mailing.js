@@ -9,7 +9,7 @@ const REDIRECT_URI="https://developers.google.com/oauthplayground";
 const REFRESH_TOKEN=process.env.REFRESH_TOKEN;
 
 module.exports = async(userName, email, preSubject, message)=>{
-    console.log(email,preSubject,message,"llega aki");
+    
     
     
     
@@ -37,6 +37,7 @@ module.exports = async(userName, email, preSubject, message)=>{
                 //text: `${message}`, // plain text body
                 html: `${message}`, // html body
             }
+console.log("mailoption",mailOptions);
 
             const result = await transporter.sendMail(mailOptions)
 
