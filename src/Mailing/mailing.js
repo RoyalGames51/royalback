@@ -9,6 +9,9 @@ const REDIRECT_URI="https://developers.google.com/oauthplayground";
 const REFRESH_TOKEN=process.env.REFRESH_TOKEN;
 
 module.exports = async(nick, email, preSubject, message)=>{
+    console.log(email,preSubject,message,"llega aki");
+    
+    console.log(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI,REFRESH_TOKEN);
     
     const oAuth2Client=new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI);
     oAuth2Client.setCredentials({refresh_token: REFRESH_TOKEN})
