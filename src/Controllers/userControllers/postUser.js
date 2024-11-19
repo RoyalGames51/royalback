@@ -12,12 +12,12 @@ const postUser = async ( nick, email, password,avatar,age,country,chips ) => {
         });
         
           
-        if(created){      
+             
             const welcomeEmail = await sendMailHandler({
                 nick, email,
                 option: "signIn"
             });
-        }
+        
                    
         return  newUser.dataValues
 

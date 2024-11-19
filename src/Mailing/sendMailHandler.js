@@ -2,18 +2,18 @@ const mailing = require('./mailing');
 
 
 
-module.exports=async({ nick, email, option})=>{
+module.exports=async( nick, email, option)=>{
 console.log(nick,email,option,"llegaka");
 
     try {
-    
+    let userName=nick
         let preSubject="";
         let message="";
 
         
         switch(option){
             case("signIn"):
-                preSubject=`¡Hola ${nick.toUpperCase(0)}! Bienvenida/o a RoyalGames!!`;
+                preSubject=`¡Hola ${userName.toUpperCase(0)}! Bienvenida/o a RoyalGames!!`;
                 message=`<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
                 <html dir="ltr" xmlns="http://www.w3.org/1999/xhtml" xmlns:o="urn:schemas-microsoft-com:office:office" lang="es">
                  <head>
@@ -150,14 +150,14 @@ console.log(nick,email,option,"llegaka");
               
                     
             default:{
-                nick="";
+                userName="";
                 email="";
                 preSubject="";
                 message="";
             }
         }
 
-        const resultMail=await mailing(nick, email, preSubject, message);
+        const resultMail=await mailing(userName, email, preSubject, message);
     
         if (resultMail)
             return('Email enviado correctamente!')
