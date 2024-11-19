@@ -1,4 +1,5 @@
-const { User } = require("../../database")
+const { User } = require("../../database");
+const sendMailHandler = require("../../Mailing/sendMailHandler");
 // const sendMailHandler = require('../../utils/mailing/sendMailHandler');
 
 const postUser = async ( nick, email, password,avatar,age,country,chips ) => {
@@ -11,13 +12,12 @@ const postUser = async ( nick, email, password,avatar,age,country,chips ) => {
         });
         
           
-        // if(created){      
-        //     const welcomeEmail = await sendMailHandler({
-        //         id: newUser.id,
-        //         name, surname, email, phone, dni, image, 
-        //         option: "signIn"
-        //     });
-        // }
+        if(created){      
+            const welcomeEmail = await sendMailHandler({
+                nick, email,
+                option: "signIn"
+            });
+        }
                    
         return  newUser.dataValues
 
