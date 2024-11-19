@@ -11,12 +11,13 @@ const postUser = async ( nick, email, password,avatar,age,country,chips ) => {
             defaults: { nick, email, password,age,avatar,country,chips }
         });
         
-          
+          const register = {
+            nick:nick,
+            email:email,
+            option:"signIn"
+          }
              
-            const welcomeEmail = await sendMailHandler({
-                nick, email,
-                option: "signIn"
-            });
+            await sendMailHandler(register);
         
                    
         return  newUser.dataValues
