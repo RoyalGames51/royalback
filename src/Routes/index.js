@@ -20,6 +20,7 @@ const getAllUserHandler = require('../Handlers/userHandlers/getAllUserHandler');
 const banUserHandler = require('../Handlers/userHandlers/banUserHandler');
 const inactiveUserHandler = require('../Handlers/userHandlers/inactiveUserHandler');
 const firstChipsHandler = require('../Handlers/userHandlers/firstChipsHandler');
+const sendMailHandler = require('../Mailing/sendMailHandler');
 
 
 router.get('/getUsers',getAllUserHandler);
@@ -34,6 +35,8 @@ router.put('/firstchips',firstChipsHandler)
 router.get('/user-email', getUserByEmailHandler);
 router.get('/user-nick',getUserByNickHandler)
 router.put('/inactivar-user',inactiveUserHandler)
+
+router.post('/send-mail', sendMailHandler)
 
 
 //------------------------------------------
