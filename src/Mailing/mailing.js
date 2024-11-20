@@ -11,6 +11,7 @@ const REFRESH_TOKEN=process.env.REFRESH_TOKEN;
 module.exports = async(userName, email, preSubject, message)=>{
     
     
+    console.log(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI,REFRESH_TOKEN);
     
     
     const oAuth2Client=new google.auth.OAuth2(CLIENT_ID,CLIENT_SECRET,REDIRECT_URI);
@@ -38,9 +39,11 @@ module.exports = async(userName, email, preSubject, message)=>{
                 html: `${message}`, // html body
             }
 
+console.log("antes de enviar");
 
             const result = await transporter.sendMail(mailOptions)
-console.log("result",result);
+console.log("despues de enviar");
+
 
             return result;
         } catch (error) {
