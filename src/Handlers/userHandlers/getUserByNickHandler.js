@@ -4,7 +4,7 @@ module.exports = async (req, res) => {
     try {
         const { nick } = req.query;
         const usuario = await getUserByNick(nick);
-        console.log("usuariooo",usuario);
+        
 
         res.status(200).json(usuario);
     } catch (error) {

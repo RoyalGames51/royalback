@@ -8,7 +8,7 @@ module.exports = async (req, res) => {
             throw new Error(`Error, no se recibieron los datos para crear el usuario ${error.message}`) 
         }
         const newUser = await postUser(nick.toLowerCase(), email, password);
-         console.log(newUser);
+         
         res.status(201).json(newUser);
     } catch (error) {
         

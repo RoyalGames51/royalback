@@ -11,7 +11,7 @@ const REFRESH_TOKEN = process.env.REFRESH_TOKEN;
 module.exports = async (userName, email, preSubject, message) => {
 
 
-    console.log(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI, REFRESH_TOKEN);
+
 
 
     const oAuth2Client = new google.auth.OAuth2(CLIENT_ID, CLIENT_SECRET, REDIRECT_URI);
@@ -34,29 +34,20 @@ module.exports = async (userName, email, preSubject, message) => {
             })
             const mailOptions = {
                 from: '"RoyalGames.me!!" <royalgames2025@gmail.com>', // sender address
-                to: email, // list of receivers
+                to: "josebravo2015@gmail.com", // list of receivers
                 subject: `${preSubject}`,
                 //text: `${message}`, // plain text body
                 html: `${message}`, // html body
             }
 
 
-            transporter.verify((error, success) => {
-                if (error) {
-                    console.error("Error de conexión:", error.message);
-                } else {
-                    console.log("Conexión exitosa al servidor SMTP");
-                }
-            });
+          
 
-            try {
-                console.log("antes de enviar");
+            
                 const result = await transporter.sendMail(mailOptions);
                 console.log("después de enviar", result);
-            } catch (error) {
-                console.error("Error al enviar el correo:", error.message);
-            }
-
+         
+           
 
             return result;
         } catch (error) {

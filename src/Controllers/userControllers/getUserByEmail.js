@@ -9,7 +9,7 @@ module.exports = async(email)=>{
                 attributes: ['id', 'name'],
             }]
         });
-console.log("control",usuario);
+
         if(!usuario)
             throw new Error(`No existe usuario con email ${email} en base de datos.`);
 

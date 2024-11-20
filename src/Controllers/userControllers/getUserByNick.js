@@ -12,7 +12,7 @@ module.exports = async(nick)=>{
 
         if(!usuario)
             throw new Error(`No existe usuario con nick ${nick} en la base de datos.`);
-console.log("usu control", usuario);
+
         return usuario;
 
     }catch(error){
