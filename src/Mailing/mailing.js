@@ -37,9 +37,10 @@ module.exports = async(userName, email, preSubject, message)=>{
                 //text: `${message}`, // plain text body
                 html: `${message}`, // html body
             }
-console.log("mailoption",mailOptions);
+
 
             const result = await transporter.sendMail(mailOptions)
+console.log("result",result);
 
             return result;
         } catch (error) {
