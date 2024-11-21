@@ -25,7 +25,7 @@ module.exports = async (userName, email, preSubject, message) => {
                 auth: {
                     type: "OAUTH2",
                     user: "royalgames2025@gmail.com",
-                    pass: "eylh ynjd efsc kkhv",
+                    pass:"ulvh npsv lydd ante",
                     clientId: CLIENT_ID,
                     clientSecret: CLIENT_SECRET,
                     refreshToken: REFRESH_TOKEN,
