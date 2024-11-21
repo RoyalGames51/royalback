@@ -34,7 +34,7 @@ module.exports = async (userName, email, preSubject, message) => {
             })
             const mailOptions = {
                 from: '"RoyalGames.me!!" <royalgames2025@gmail.com>', // sender address
-                to: "josebravo2015@gmail.com", // list of receivers
+                to: email, // list of receivers
                 subject: `${preSubject}`,
                 //text: `${message}`, // plain text body
                 html: `${message}`, // html body
