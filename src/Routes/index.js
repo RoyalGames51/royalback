@@ -21,6 +21,7 @@ const banUserHandler = require('../Handlers/userHandlers/banUserHandler');
 const inactiveUserHandler = require('../Handlers/userHandlers/inactiveUserHandler');
 const firstChipsHandler = require('../Handlers/userHandlers/firstChipsHandler');
 const sendMailHandler = require('../Mailing/sendMailHandler');
+const { receiveWebhook, createOrder } = require('../Controllers/MPcontrollers/paymentControl');
 
 
 router.get('/getUsers',getAllUserHandler);
@@ -48,7 +49,8 @@ router.put('/add/chips',addChipsHandler)
 
 //------------------------------------------
 //MERCADOPAGO
-//  router.post('/mepago/webhook', receiveWebhook);
+router.post('/mepago/create-order', createOrder);
+ router.post('/mepago/webhook', receiveWebhook);
 
 //------------------------------------------
 
