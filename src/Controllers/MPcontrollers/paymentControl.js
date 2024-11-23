@@ -17,7 +17,8 @@ const createOrder = async (req, res) => {
   const {
     userId,
     
-    price,date,paymentPlataform,chips} = req.body
+    price,date,paymentPlataform,chips} = req.body;
+ console.log(userId,date,paymentPlataform,price,chips);
  
   try {
     let preference = {
