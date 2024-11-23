@@ -1,15 +1,10 @@
-const mercadopago = require("mercadopago");
 
 const dotenv = require("dotenv");
+const { Pay } = require("../../database");
+const postPay = require("../payControllers/postPay");
 
-
- const { Pay } = require("../../database");
- const postPay = require("../payControllers/postPay");
-
- dotenv.config();
- const getUserById = require('../../Controllers/userControllers/getUserbyId');
-// const sendMailHandler = require("../../utils/mailing/sendMailHandler")
-
+const getUserById = require('../../Controllers/userControllers/getUserbyId');
+const mercadopago = require("mercadopago");
 
 
 const createOrder = async (req, res) => {
