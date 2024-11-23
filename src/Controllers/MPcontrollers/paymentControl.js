@@ -34,7 +34,7 @@ const createOrder = async (req, res) => {
 
        items: [
         {
-          title: chips,
+          title: chips.toString(),
           unit_price: price,
           currency_id: "ARS",
           quantity: 1,
