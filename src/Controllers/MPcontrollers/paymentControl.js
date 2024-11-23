@@ -1,10 +1,10 @@
-
-const dotenv = require("dotenv");
 const { Pay } = require("../../database");
 const postPay = require("../payControllers/postPay");
 
 const getUserById = require('../../Controllers/userControllers/getUserbyId');
 const mercadopago = require("mercadopago");
+require("dotenv").config();
+
 
 
 const createOrder = async (req, res) => {
