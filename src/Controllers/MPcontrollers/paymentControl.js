@@ -80,6 +80,7 @@ const receiveWebhook = async (req, res) => {
        const data = await mercadopago.payment.findById(payment["data.id"]);
       // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
       //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
+     console.log(data.body.metadata);
      
       const pay ={
         userId: data.body.metadata.user_id,
