@@ -3,6 +3,7 @@ const postPay = require("../payControllers/postPay");
 
 const getUserById = require('../../Controllers/userControllers/getUserbyId');
 const mercadopago = require("mercadopago");
+const addChips = require("../chipsControllers/addChips");
 require("dotenv").config();
 
 
@@ -83,10 +84,11 @@ const receiveWebhook = async (req, res) => {
       const pay ={
         userId: data.body.metadata.user_id,
         chips: data.body.metadata.chips,
-        paymentPlataform:  data.body.metadata.paymentPlataform,
+        paymentPlataform:  data.body.metadata.payment_plataform,
         date: data.body.metadata.date,
         price:  data.body.metadata.price
       }
+      await addChips(data.body.metadata.user_id,data.body.metadata.chips)
     
       // await userPayment.reload();
       
