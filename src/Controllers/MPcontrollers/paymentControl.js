@@ -89,7 +89,7 @@ const receiveWebhook = async (req, res) => {
         date: data.body.metadata.date,
         price:  data.body.metadata.price
       }
-      await addChips(data.body.metadata.user_id,data.body.metadata.chips)
+      await addChips(data.body.metadata.user_id,Number(data.body.metadata.chips))
     
       // await userPayment.reload();
       
