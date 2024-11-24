@@ -7,6 +7,7 @@ require("dotenv").config();
 
 
 const createOrderMx = async (req, res) => { 
+console.log(ACCESS_TOKEN_2);
 
   mercadopago.configure({
     access_token: process.env.ACCESS_TOKEN_2,

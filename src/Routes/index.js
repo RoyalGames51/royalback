@@ -22,8 +22,8 @@ const inactiveUserHandler = require('../Handlers/userHandlers/inactiveUserHandle
 const firstChipsHandler = require('../Handlers/userHandlers/firstChipsHandler');
 const sendMailHandler = require('../Mailing/sendMailHandler');
 const { receiveWebhook, createOrder } = require('../Controllers/MPcontrollers/paymentControl');
-const { createOrderMx } = require('../Controllers/MPcontrollers/paymentControlMX');
-const { receiveWebhookMx } = require('../Controllers/MPcontrollers/paymentControlMX');
+const { createOrderMx,receiveWebhookMx } = require('../Controllers/MPcontrollers/paymentControlMX');
+
 
 
 router.get('/getUsers',getAllUserHandler);
