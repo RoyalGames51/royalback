@@ -4,7 +4,8 @@ const router = Router();
 const postUserHandler = require('../Handlers/userHandlers/postUserHandler')
 const deleteUserHandler = require('../Handlers/userHandlers/deleteUserHandler')
 const getUserByEmailHandler = require('../Handlers/userHandlers/getUserByEmailHandler')
-const getUserByIdHandler = require('../Handlers/userHandlers/getUserByIdHandler')
+const getUserByIdHandler = require('../Handlers/userHandlers/getUserByIdHandler');
+const { createPaypalOrder } = require('../Controllers/PaypalControllers/paypal');
 
 
 const userAdminHandler = require('../Handlers/userHandlers/userAdminHandler')
@@ -58,7 +59,9 @@ router.post('/mepago/create-order', createOrder);
  router.post('/mepago/webhook/mx', receiveWebhookMx);
 
 //------------------------------------------
+//paypal
 
+router.post('/paypal/create-order', createPaypalOrder);
 //------------------------------------------
 //Pay
 router.post('/newpay',postPayHandler)
