@@ -19,7 +19,7 @@ module.exports = (sequelize) => {
 
         },
         chips: {
-            type: DataTypes.STRING,
+            type: DataTypes.BIGINT,
             allowNull: false
         },
         userId: {
