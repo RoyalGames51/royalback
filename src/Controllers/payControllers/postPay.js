@@ -1,7 +1,8 @@
 const {User, Pay} =require('../../database')
 
 const postPay = async ({paymentPlataform,price,chips,userId,date})=>{
-    const chipString = chips.toString()
+    const chipString = chips ? chips.toString() : "0";
+
     try {
         const [newPay, created] = await Pay.findOrCreate({
             where: {
