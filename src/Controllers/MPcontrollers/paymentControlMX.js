@@ -104,7 +104,7 @@ const receiveWebhookMx = async (req, res) => {
         }
   
   
-        localStorage.clear();
+       
   
         return res.status(204).json({ message: "Pago procesado con éxito." });
       }
