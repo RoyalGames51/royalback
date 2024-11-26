@@ -3,6 +3,7 @@ const getUserById = require('../../Controllers/userControllers/getUserbyId');
 const mercadopago = require("mercadopago");
 const addChips = require("../chipsControllers/addChips");
 require("dotenv").config();
+const { Pay } = require("../../database");
 
 
 
@@ -68,53 +69,49 @@ const createOrderMx = async (req, res) => {
 };
 
 const receiveWebhookMx = async (req, res) => {
-  try {
-    
-    const payment = req.query;
-    // const {date_created, user_id} = req.body
-
-    
-
-    if (payment.type === "payment" ) {
-       const data = await mercadopago.payment.findById(payment["data.id"]);
-      // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
-      //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
-     console.log(data.body.metadata);
-     
-      const pay ={
-        userId: data.body.metadata.user_id,
-        chips: data.body.metadata.chips,
-        paymentPlataform:  data.body.metadata.payment_plataform,
-        date: data.body.metadata.date,
-        price:  data.body.metadata.price
+    try {
+      const payment = req.query;
+  
+      if (payment.type === "payment") {
+        const data = await mercadopago.payment.findById(payment["data.id"]);
+  
+        const pay = {
+          userId: data.body.metadata.user_id,
+          chips: data.body.metadata.chips,
+          paymentPlataform: data.body.metadata.payment_plataform,
+          date: data.body.metadata.date,
+          price: data.body.metadata.price,
+          paymentId: data.body.id, // Se añade para evitar duplicados
+        };
+  
+        // Verificar si el pago ya fue procesado
+        const existingPay = await Pay.findOne({ where: { paymentId: data.body.id } });
+        if (existingPay) {
+          return res.status(200).json({ message: "El pago ya fue procesado." });
+        }
+  
+        // Operaciones secuenciales con validaciones
+        const chipsAdded = await addChips(pay.userId, Number(pay.chips));
+        if (!chipsAdded) {
+          throw new Error("Error al añadir fichas.");
+        }
+  
+        const paymentRecorded = await postPay(pay);
+        if (!paymentRecorded) {
+          // Si no se registra el pago, revertir fichas añadidas
+          await addChips(pay.userId, -Number(pay.chips));
+          throw new Error("Error al registrar el pago, operación revertida.");
+        }
+  
+  
+        localStorage.clear();
+  
+        return res.status(204).json({ message: "Pago procesado con éxito." });
       }
-      await addChips(data.body.metadata.user_id,Number(data.body.metadata.chips))
-    
-      // await userPayment.reload();
-      
-      // await deleteTrip(newTrip.id);
-      const resp = await postPay(pay)
-      const usuario = await getUserById(data.body.metadata.user_id)
-      console.log(usuario, "usuario")
-    //   const mailReserve = {
-    //     userId: data.body.metadata.user_id,
-    //     tripId: resp.id,
-    //     option: "reserve",
-    //     email: usuario.email,
-    //     name: usuario.name
-    // }
-//     console.log(mailReserve)
-// await sendMailHandler(mailReserve);
-    
-      localStorage.clear();
-      // AGREGAR LO DE ENVIAR MAIL
-res.status(204).json(resp);
-    } 
-    
-  } catch (error) {
-    console.error("Error:", error);
-    return res.status(500).json(`Error en payment controller Receive Webhook: ${error.message}`);
-  }
-};
-
-module.exports = { createOrderMx, receiveWebhookMx }
+    } catch (error) {
+      console.error("Error:", error);
+      return res.status(500).json(`Error en payment controller Receive Webhook: ${error.message}`);
+    }
+  };
+  
+  module.exports = { createOrderMx, receiveWebhookMx };
