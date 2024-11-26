@@ -76,12 +76,12 @@ const receiveWebhook = async (req, res) => {
             const data = await mercadopago.payment.findById(payment["data.id"]);
 
             const pay = {
-                userId: data.body.metadata.user_id, // Verifica el nombre correcto del campo
+                userId: data.body.metadata.user_id,
                 chips: data.body.metadata.chips,
                 paymentPlataform: data.body.metadata.payment_plataform,
                 date: data.body.metadata.date,
                 price: data.body.metadata.price,
-                paymentId: data.body.id, // Guarda el ID único del pago
+                paymentId: data.body.id,
             };
 
             // Verifica si el pago ya fue procesado
@@ -90,16 +90,20 @@ const receiveWebhook = async (req, res) => {
                 return res.status(200).json({ message: "El pago ya fue procesado." });
             }
 
-            // Transacción para garantizar consistencia
-            await sequelize.transaction(async () => {
-                // Añadir fichas
-                await addChips(pay.userId, Number(pay.chips));
+            // Realizar operaciones secuenciales con validaciones
+            const chipsAdded = await addChips(pay.userId, Number(pay.chips));
+            if (!chipsAdded) {
+                throw new Error("Error al añadir fichas.");
+            }
 
-                // Registrar el pago
-                await postPay(pay);
-            });
+            const paymentRecorded = await postPay(pay);
+            if (!paymentRecorded) {
+                // Si no se puede registrar el pago, revertir fichas añadidas
+                await addChips(pay.userId, -Number(pay.chips));
+                throw new Error("Error al registrar el pago, operación revertida.");
+            }
 
-            res.status(204).json({ message: "Pago procesado con éxito." });
+            return res.status(204).json({ message: "Pago procesado con éxito." });
         }
     } catch (error) {
         console.error("Error:", error);
