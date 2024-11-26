@@ -87,13 +87,15 @@ const receiveWebhook = async (req, res) => {
          
 
             // Transacción para garantizar consistencia
-            await sequelize.transaction(async (transaction) => {
-                // Añadir fichas
+            if(pay.paymentPlataform==="MercadoPago"){
                 await addChips(pay.userId, Number(pay.chips));
 
                 // Registrar el pago
                 await postPay(pay);
-            });
+            }
+                // Añadir fichas
+              
+          
 
             res.status(204).json({ message: "Pago procesado con éxito." });
         }
