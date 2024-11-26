@@ -6,6 +6,7 @@ module.exports = (sequelize) => {
         paymentId: {
            type: DataTypes.INTEGER,
             allowNull: false,
+            primaryKey: true,
         },
         paymentPlataform: {
             type: DataTypes.STRING,
