@@ -80,11 +80,12 @@ const receiveWebhook = async (req, res) => {
                 chips: data.body.metadata.chips,
                 paymentPlataform: data.body.metadata.payment_plataform,
                 date: data.body.metadata.date,
-                price: data.body.metadata.price
+                price: data.body.metadata.price,
+                paymentId: data.body.id, // Guarda el ID único del pago
             };
 
             // Verifica si el pago ya fue procesado
-            const existingPay = await Pay.findOne({ where: { id: data.body.id } });
+            const existingPay = await Pay.findOne({ where: { paymentId: data.body.id } });
             if (existingPay) {
                 return res.status(200).json({ message: "El pago ya fue procesado." });
             }
