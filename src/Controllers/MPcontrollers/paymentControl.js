@@ -84,18 +84,19 @@ const receiveWebhook = async (req, res) => {
             };
 
             // Verifica si el pago ya fue procesado
-         
+            const existingPay = await Pay.findOne({ where: { id: data.body.id } });
+            if (existingPay) {
+                return res.status(200).json({ message: "El pago ya fue procesado." });
+            }
 
             // Transacción para garantizar consistencia
-            if(pay.paymentPlataform==="MercadoPago"){
+            await sequelize.transaction(async () => {
+                // Añadir fichas
                 await addChips(pay.userId, Number(pay.chips));
 
                 // Registrar el pago
                 await postPay(pay);
-            }
-                // Añadir fichas
-              
-          
+            });
 
             res.status(204).json({ message: "Pago procesado con éxito." });
         }
