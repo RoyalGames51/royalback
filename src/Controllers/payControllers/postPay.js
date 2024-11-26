@@ -1,6 +1,6 @@
 const {User, Pay} =require('../../database')
 
-const postPay = async ({paymentPlataform,price,chips,userId,date})=>{
+const postPay = async (paymentPlataform,price,chips,userId,date)=>{
    console.log(chips,price,userId);
    
 
