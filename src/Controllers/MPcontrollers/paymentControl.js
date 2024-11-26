@@ -1,6 +1,6 @@
 const { Pay } = require("../../database");
 const postPay = require("../payControllers/postPay");
-
+const { sequelize } = require("../../database");
 const getUserById = require('../../Controllers/userControllers/getUserbyId');
 const mercadopago = require("mercadopago");
 const addChips = require("../chipsControllers/addChips");
@@ -43,9 +43,9 @@ const createOrder = async (req, res) => {
           // picture_url: "",
         }],
       back_urls: {
-        success: "https://vamos.pe/paymentStatus",
-        pending: "https://vamos.pe/pending",
-         failure: "https://vamos.pe/paymentFailed"
+        success: "https://royalgames.me",
+        pending: "https://royalgames.me",
+         failure: "https://royalgames.me"
          
       },
 
@@ -69,55 +69,43 @@ const createOrder = async (req, res) => {
 };
 
 const receiveWebhook = async (req, res) => {
-  try {
-    
-    const payment = req.query;
-    // const {date_created, user_id} = req.body
+    try {
+        const payment = req.query;
 
-    
+        if (payment.type === "payment") {
+            const data = await mercadopago.payment.findById(payment["data.id"]);
 
-    if (payment.type === "payment" ) {
-       const data = await mercadopago.payment.findById(payment["data.id"]);
-      // const userPayment = await Trip.findOne({ where: { id: data.body.metadata.trip_id } });//BUSCA EL TRIP
-      //  await newTrip.update({ stateOfTrip: "reserved" }); //CAMBIA DE OFFER A RESERVED
-     console.log(data.body.metadata);
-     
-      const pay ={
-        userId: data.body.metadata.user_id,
-        chips: data.body.metadata.chips,
-        paymentPlataform:  data.body.metadata.payment_plataform,
-        date: data.body.metadata.date,
-        price:  data.body.metadata.price
-      }
-      await addChips(data.body.metadata.user_id,Number(data.body.metadata.chips))
-    
-      // await userPayment.reload();
-      
-      // await deleteTrip(newTrip.id);
-      const resp = await postPay(pay)
-      const usuario = await getUserById(data.body.metadata.user_id)
-      console.log(usuario, "usuario")
-    //   const mailReserve = {
-    //     userId: data.body.metadata.user_id,
-    //     tripId: resp.id,
-    //     option: "reserve",
-    //     email: usuario.email,
-    //     name: usuario.name
-    // }
-//     console.log(mailReserve)
-// await sendMailHandler(mailReserve);
-    
-      localStorage.clear();
-      // AGREGAR LO DE ENVIAR MAIL
-res.status(204).json(resp);
-    } 
-    
-  } catch (error) {
-    console.error("Error:", error);
-    return res.status(500).json(`Error en payment controller Receive Webhook: ${error.message}`);
-  }
+            const pay = {
+                userId: data.body.metadata.user_id, // Verifica el nombre correcto del campo
+                chips: data.body.metadata.chips,
+                paymentPlataform: data.body.metadata.payment_plataform,
+                date: data.body.metadata.date,
+                price: data.body.metadata.price,
+                paymentId: data.body.id, // Guarda el ID único del pago
+            };
+
+            // Verifica si el pago ya fue procesado
+            const existingPay = await Pay.findOne({ where: { paymentId: data.body.id } });
+            if (existingPay) {
+                return res.status(200).json({ message: "El pago ya fue procesado." });
+            }
+
+            // Transacción para garantizar consistencia
+            await sequelize.transaction(async (transaction) => {
+                // Añadir fichas
+                await addChips(pay.userId, Number(pay.chips), { transaction });
+
+                // Registrar el pago
+                await postPay(pay, { transaction });
+            });
+
+            res.status(204).json({ message: "Pago procesado con éxito." });
+        }
+    } catch (error) {
+        console.error("Error:", error);
+        return res.status(500).json(`Error en payment controller Receive Webhook: ${error.message}`);
+    }
 };
-
 module.exports = { createOrder, receiveWebhook }
 
 

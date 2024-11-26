@@ -7,18 +7,18 @@ const postPay = async ({paymentPlataform,price,chips,userId,date})=>{
     try {
         const [newPay, created] = await Pay.findOrCreate({
             where: {
-                userId: userId,
-                date: date,
-                paymentPlataform: paymentPlataform,
+                userId: userId.toString(),
+                date: date.toString(),
+                paymentPlataform: paymentPlataform.toString(),
                 chips:chips,
                 price:price.toString()
             },
             defaults: {
-                userId,
-                date,
+                userId:userId.toString(),
+                date:date.toString(),
                 price:price.toString(),
                 chips,
-                paymentPlataform
+                paymentPlataform:paymentPlataform.toString()
             }
         });
         const user = await User.findByPk(userId);

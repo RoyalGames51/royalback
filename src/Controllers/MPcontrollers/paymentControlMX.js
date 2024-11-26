@@ -43,8 +43,8 @@ const createOrderMx = async (req, res) => {
         }],
       back_urls: {
         success: "https://ROYALGAMES.ME/",
-        pending: "https://vamos.pe/pending",
-         failure: "https://vamos.pe/paymentFailed"
+        pending: "https://royalgames.me",
+         failure: "https://royalgames.me"
          
       },
 
