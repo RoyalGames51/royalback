@@ -80,8 +80,7 @@ const receiveWebhook = async (req, res) => {
                 chips: data.body.metadata.chips,
                 paymentPlataform: data.body.metadata.payment_plataform,
                 date: data.body.metadata.date,
-                price: data.body.metadata.price,
-                paymentId: data.body.id, // Guarda el ID único del pago
+                price: data.body.metadata.price
             };
 
             // Verifica si el pago ya fue procesado
@@ -93,10 +92,10 @@ const receiveWebhook = async (req, res) => {
             // Transacción para garantizar consistencia
             await sequelize.transaction(async (transaction) => {
                 // Añadir fichas
-                await addChips(pay.userId, Number(pay.chips), { transaction });
+                await addChips(pay.userId, Number(pay.chips));
 
                 // Registrar el pago
-                await postPay(pay, { transaction });
+                await postPay(pay);
             });
 
             res.status(204).json({ message: "Pago procesado con éxito." });
