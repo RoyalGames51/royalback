@@ -1,10 +1,11 @@
 const postPay = require('../../Controllers/payControllers/postPay');
 
 module.exports = async (req, res) => {
-    const { paymentPlataform,price,chips,userId,date,paymentId} = req.body;
+    const pay = req.body;
+console.log(pay);
 
     try {
-        const newPay = await postPay(paymentPlataform,price,chips,userId,date,paymentId);
+        const newPay = await postPay(pay);
 
         res.status(200).json(newPay);
     } catch (error) {
