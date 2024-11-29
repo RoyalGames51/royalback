@@ -11,7 +11,7 @@ const getAllUsers = async () => {
                 },
                 {
                     model: Pay, 
-                    attributes: ['id', 'date', 'paymentPlataform', 'chips', 'price', 'userId'],
+                    attributes: ['paymentId', 'date', 'paymentPlataform', 'chips', 'price', 'userId'],
                 }
             ]
         });           
