@@ -9,7 +9,7 @@ module.exports = (sequelize) => {
         },
         image: {
             type: DataTypes.STRING,
-            allowNull: false,
+            allowNull: true,
         },
         nick: {
             type: DataTypes.STRING(30),
@@ -66,7 +66,10 @@ module.exports = (sequelize) => {
 
     // Relación muchos a muchos entre User y Game
     User.associate = (models) => {
-        
+        User.belongsToMany(models.Game, { 
+            through: 'UserGames', // Tabla intermedia que se crea automáticamente
+            foreignKey: 'userId' 
+        });
         User.belongsToMany(models.Pay, { 
             foreignKey: 'userId' 
         });

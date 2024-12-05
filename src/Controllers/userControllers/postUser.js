@@ -1,7 +1,7 @@
 const { User } = require("../../database");
 const sendMailHandler = require("../../Mailing/sendMailHandler");
 
-const postUser = async (nick, email, password, avatar, age, country, chips) => {
+const postUser = async (nick, email, password, image, avatar, age, country, chips) => {
     try {
         // Convertir el nick a minúsculas
         const normalizedNick = nick.toLowerCase();
@@ -19,6 +19,7 @@ const postUser = async (nick, email, password, avatar, age, country, chips) => {
                 nick: normalizedNick, 
                 email, 
                 password, 
+                image,
                 avatar, 
                 age, 
                 country, 
