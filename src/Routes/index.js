@@ -24,6 +24,12 @@ const firstChipsHandler = require('../Handlers/userHandlers/firstChipsHandler');
 const sendMailHandler = require('../Mailing/sendMailHandler');
 const { receiveWebhook, createOrder } = require('../Controllers/MPcontrollers/paymentControl');
 const { createOrderMx,receiveWebhookMx } = require('../Controllers/MPcontrollers/paymentControlMX');
+const {
+    getFavoritesHandler,
+    addFavoriteHandler,
+    removeFavoriteHandler,
+} = require("../Handlers/favoriteHandlers"); 
+const createGameHandler = require("../Handlers/gameHandlers/createGameHandler");
 
 
 
@@ -42,6 +48,12 @@ router.put('/inactivar-user',inactiveUserHandler)
 
 router.post('/send-mail', sendMailHandler)
 
+router.get('/favorites/:userId', getFavoritesHandler); // Obtener juegos favoritos
+router.post('/favorites', addFavoriteHandler); // Agregar favorito
+router.delete('/favorites/:userId/:gameId', removeFavoriteHandler); // Eliminar favorito
+
+
+router.post('/game', createGameHandler);//crea un juego
 
 //------------------------------------------
 //Chips
