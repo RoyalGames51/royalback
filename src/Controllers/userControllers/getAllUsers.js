@@ -7,7 +7,7 @@ const getAllUsers = async () => {
             include: [
                 {
                     model: Game,
-                    attributes: ['id', 'userId', 'name'],
+                    attributes: ['id', 'name'],
                 },
                 {
                     model: Pay, 
