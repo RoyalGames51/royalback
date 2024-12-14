@@ -14,7 +14,7 @@ server.use(morgan("dev"));
 server.use(express.json());
 
 server.use(cors({
-    origin: ['https://www.royalgames.me', 'http://localhost:5173']
+    origin: ['https://www.royalgames.me', 'http://localhost:5173','https://html-classic.itch.zone']
   }));
 server.use(bodyParser.json()); 
 
