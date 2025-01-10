@@ -25,7 +25,12 @@ const addFavorite = async (userId, gameId) => {
         if (!user || !game) throw new Error('Usuario o juego no encontrado.');
 
         await user.addGame(game); // Método generado por la relación Sequelize
-        return game; // Retorna el juego agregado
+        console.log('juego en bd', game)
+
+        // Devuelve el juego completo
+        return await Game.findByPk(gameId, {
+            attributes: ['id', 'name'], // Ajusta según tus columnas
+        });
     } catch (error) {
         throw new Error(`Error al agregar favorito: ${error.message}`);
     }
