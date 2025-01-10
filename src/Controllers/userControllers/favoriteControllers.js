@@ -3,15 +3,15 @@ const { User, Game } = require('../../database');
 // Obtener juegos favoritos del usuario
 const getFavorites = async (userId) => {
     try {
-        const user = await User.findByPk(userId, {
+        const user = await User.findOne(userId, {
             include: {
                 model: Game,
-                attributes: ['id', 'name'], // Ajusta según tus columnas
+                attributes: ['id'], // Ajusta según tus columnas
                 through: { attributes: [] }, // Excluye la tabla intermedia
             },
         });
         if (!user) throw new Error('Usuario no encontrado.');
-        return user.Games; // Juegos favoritos
+        return UserFavGames; // Juegos favoritos
     } catch (error) {
         throw new Error(`Error al obtener favoritos: ${error.message}`);
     }
