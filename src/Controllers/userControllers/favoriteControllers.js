@@ -3,37 +3,36 @@ const { User, Game } = require('../../database');
 // Obtener juegos favoritos del usuario
 const getFavorites = async (userId) => {
     try {
-        const user = await User.findOne(userId, {
-            include: {
-                model: Game,
-                attributes: ['id'], // Ajusta según tus columnas
-                through: { attributes: [] }, // Excluye la tabla intermedia
-            },
+        const user = await User.findByPk(userId, {
+          include: {
+            model: Game,
+            through: { attributes: [] }, // No incluir datos adicionales de la tabla intermedia
+          },
         });
-        if (!user) throw new Error('Usuario no encontrado.');
-        return UserFavGames; // Juegos favoritos
-    } catch (error) {
-        throw new Error(`Error al obtener favoritos: ${error.message}`);
-    }
+    
+        return user ? user.Games : [];
+      } catch (error) {
+        console.error('Error al obtener los favoritos:', error);
+      }
 };
 
 // Agregar un juego a favoritos
 const addFavorite = async (userId, gameId) => {
     try {
+        // Busca el usuario y el juego
         const user = await User.findByPk(userId);
         const game = await Game.findByPk(gameId);
-        if (!user || !game) throw new Error('Usuario o juego no encontrado.');
-
-        await user.addGame(game); // Método generado por la relación Sequelize
-        console.log('juego en bd', game)
-
-        // Devuelve el juego completo
-        return await Game.findByPk(gameId, {
-            attributes: ['id', 'name'], // Ajusta según tus columnas
-        });
-    } catch (error) {
-        throw new Error(`Error al agregar favorito: ${error.message}`);
-    }
+    
+        // Si ambos existen, agrega la relación en la tabla intermedia
+        if (user && game) {
+          await user.addGame(game);
+          console.log('Juego agregado a favoritos');
+        } else {
+          console.log('Usuario o juego no encontrado');
+        }
+      } catch (error) {
+        console.error('Error al agregar favorito:', error);
+      }
 };
 
 // Eliminar un juego de favoritos

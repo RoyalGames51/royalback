@@ -17,7 +17,12 @@ module.exports = (sequelize) => {
     });
 
     // Relación muchos a muchos entre Game y User
-    
+    Game.associate = (models) => {
+        Game.belongsToMany(models.User, {
+          through: 'userGames', // Tabla intermedia
+          foreignKey: 'gameId',
+        });
+      };
 
     return Game;
 };

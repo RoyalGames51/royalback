@@ -43,10 +43,7 @@ module.exports = (sequelize) => {
             type: DataTypes.STRING,
             allowNull: true,
         },
-        favorites: {
-            type: DataTypes.STRING,
-            allowNull: true,
-        },
+        
         country: {
             type: DataTypes.STRING,
             allowNull: true,
@@ -70,14 +67,15 @@ module.exports = (sequelize) => {
 
     // Relación muchos a muchos entre User y Game
     User.associate = (models) => {
-        // User.belongsToMany(models.Game, { 
-        //     through: 'UserGames', // Tabla intermedia que se crea automáticamente
-        //     foreignKey: 'userId' 
-        // });
+         User.belongsToMany(models.Game, { 
+             through: 'UserGames', // Tabla intermedia que se crea automáticamente
+            foreignKey: 'userId' 
+         });
         User.belongsToMany(models.Pay, { 
             foreignKey: 'userId' 
         });
     };
+    
 
     return User;
 };
