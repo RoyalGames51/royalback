@@ -6,7 +6,7 @@ const getFavorites = async (userId) => {
         const user = await User.findByPk(userId, {
             include: {
                 model: Game,
-                attributes: ['id', 'name', 'image', 'description'], // Ajusta según tus columnas
+                attributes: ['id', 'name'], // Ajusta según tus columnas
                 through: { attributes: [] }, // Excluye la tabla intermedia
             },
         });
