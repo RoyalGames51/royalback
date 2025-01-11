@@ -9,8 +9,9 @@ const getFavorites = async (userId) => {
             through: { attributes: [] }, // No incluir datos adicionales de la tabla intermedia
           },
         });
+        const favoriteGamesIds = user.Games.map((game) => game.id);
+    res.json(favoriteGamesIds);
     
-        return user ? user.Games : [];
       } catch (error) {
         console.error('Error al obtener los favoritos:', error);
       }
