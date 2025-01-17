@@ -48,8 +48,8 @@ Pay.belongsTo(User,{through: "UserPays"});
 User.belongsToMany(Pay,{through: "UserPays"});
 
 
-User.belongsToMany(Game, { through: 'UserFavGames' });
-Game.belongsToMany(User, { through: 'UserFavGames' });
+User.belongsToMany(Game, { through: 'userGames', foreignKey: 'userId' });
+Game.belongsToMany(User, { through: 'userGames', foreignKey: 'gameId' });
 
 
 

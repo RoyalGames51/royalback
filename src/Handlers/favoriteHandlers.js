@@ -10,11 +10,13 @@ const getFavoritesHandler = async (req, res) => {
     }
 };
 
+
+
 const addFavoriteHandler = async (req, res) => {
     const { userId, gameId } = req.body;
     try {
-        const favorite = await addFavorite(userId, gameId);
-        res.status(201).json(favorite);
+        const favoriteGame = await addFavorite(userId, gameId);
+        res.status(201).json(favoriteGame);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }

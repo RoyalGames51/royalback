@@ -3,18 +3,20 @@ const { User } = require('../../database');
 const updateUser = async (id, newData) => {
     try {
         const userToUpdate = await User.findByPk(id);
-      
+
         if (!userToUpdate) {
             throw new Error("Usuario inexistente");
         }
 
-        // Actualiza solo los campos presentes en `newData`
-        await userToUpdate.update(Object.assign({}, userToUpdate.toJSON(), newData));
-        
-        // No necesitas `reload()` a menos que necesites confirmar los cambios
+        // Actualiza solo los campos proporcionados en `newData`
+        await userToUpdate.update(newData);
+
+        // Retorna los datos actualizados
+        const updatedUser = await userToUpdate.reload();
+
         return {
             message: 'Usuario actualizado',
-            user: userToUpdate
+            user: updatedUser
         };
     } catch (error) {
         console.error(`Error en updateUser:`, error);
