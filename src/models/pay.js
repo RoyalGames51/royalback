@@ -4,7 +4,7 @@ module.exports = (sequelize) => {
     
     const Pay= sequelize.define('Pay', {
         paymentId: {
-           type: DataTypes.STRING,
+           type: DataTypes.BIGINT,
             allowNull: false,
             primaryKey: true,
         },

@@ -7,7 +7,7 @@ const postPay = async ({paymentPlataform,price,chips,userId,date,paymentId})=>{
     try {
         const [newPay, created] = await Pay.findOrCreate({
             where: {
-                paymentId:paymentId.toString(),
+                paymentId:paymentId,
                 userId: userId.toString(),
                 date: date.toString(),
                 paymentPlataform: paymentPlataform.toString(),
@@ -15,7 +15,7 @@ const postPay = async ({paymentPlataform,price,chips,userId,date,paymentId})=>{
                 price:price.toString()
             },
             defaults: {
-                paymentId:paymentId.toString(),
+                paymentId,
                 userId:userId.toString(),
                 date:date.toString(),
                 price:price.toString(),
