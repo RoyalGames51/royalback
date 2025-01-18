@@ -1,3 +1,6 @@
+const paypal = require('@paypal/checkout-server-sdk');
+
+
 const capturePaypalOrder = async (req, res) => {
     const { orderId } = req.body;
   
