@@ -5,7 +5,7 @@ const CLIENTID = process.env.CLIENTID;
 const SECRETKEY = process.env.SECRETKEY
 
 // Configuración del cliente de PayPal
-const environment = new paypal.core.SandboxEnvironment(
+const environment = new paypal.core.LiveEnvironment(
   CLIENTID,
   SECRETKEY
 );
