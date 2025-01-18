@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
             avatar,
             age, 
             country, 
-            chips } = req.body;
+            chips, sexo } = req.body;
         if( !nick || !email){
             throw new Error(`Error, no se recibieron los datos para crear el usuario ${error.message}`) 
         }
@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
         avatar, 
         age, 
         country, 
-        chips);
+        chips,sexo);
          
         res.status(201).json(newUser);
     } catch (error) {
