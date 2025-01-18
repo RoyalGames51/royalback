@@ -12,7 +12,7 @@ const environment = new paypal.core.LiveEnvironment(
 const client = new paypal.core.PayPalHttpClient(environment);
 
 // Crear orden de pago
-exports.createPaypalOrder = async (req, res) => {
+const createPaypalOrder = async (req, res) => {
   const { price, userId, chips } = req.body;
 
   const request = new paypal.orders.OrdersCreateRequest();
@@ -39,3 +39,5 @@ exports.createPaypalOrder = async (req, res) => {
     res.status(500).send('Error al crear la orden de PayPal');
   }
 };
+
+module.exports = {client, createPaypalOrder};

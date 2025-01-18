@@ -1,4 +1,5 @@
 const paypal = require('@paypal/checkout-server-sdk');
+const {client} =require ('../PaypalControllers/paypal')
 
 
 const capturePaypalOrder = async (req, res) => {
