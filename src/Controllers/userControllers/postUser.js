@@ -16,7 +16,7 @@ const postUser = async (nick, email, password, image, avatar, age, country, chip
 
         // Asignar imagen predeterminada si no se proporciona
         if (!image) {
-            image = sexo === 'M' 
+            image = sexo === 'H' 
                 ? 'https://lumiere-a.akamaihd.net/v1/images/cg_avatar_rerelease_mobile_785_f561a1e6.jpeg?region=0,0,1024,576&width=960' 
                 : 'https://i.pinimg.com/236x/9a/92/cc/9a92cc07d4bcf692f510248b849c4389.jpg';
         }
