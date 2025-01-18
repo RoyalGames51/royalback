@@ -30,6 +30,7 @@ const {
     removeFavoriteHandler,
 } = require("../Handlers/favoriteHandlers"); 
 const createGameHandler = require("../Handlers/gameHandlers/createGameHandler");
+const capturePaypalOrder = require('../Controllers/PaypalControllers/paypalCapture');
 
 
 
@@ -76,7 +77,8 @@ router.post('/mepago/create-order', createOrder);
 router.post('/paypal/create-order', createPaypalOrder);
 //------------------------------------------
 //Pay
-router.post('/newpay',postPayHandler)
+router.post('/newpay',postPayHandler);
+router.post('/capture-paypal-order', capturePaypalOrder)
 //------------------------------------------
 
 module.exports= router;
