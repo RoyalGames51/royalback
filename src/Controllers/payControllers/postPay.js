@@ -10,6 +10,7 @@ const postPay = async ({ paymentPlataform, price, chips, userId, date, paymentId
     if (!sanitizedPaymentId) {
       throw new Error('El paymentId no contiene números válidos.');
     }
+console.log(sanitizedPaymentId);
 
     const [newPay, created] = await Pay.findOrCreate({
       where: {
