@@ -10,9 +10,7 @@ const postPay = async ({ paymentPlataform, price, chips, userId, date, paymentId
     : paymentId.toString().replace(/\D/g, ''); // Convierte a string y elimina letras
    // \D coincide con todo lo que no es un dígito
 
-    if (!sanitizedPaymentId) {
-      throw new Error('El paymentId no contiene números válidos.');
-    }
+    
 console.log(sanitizedPaymentId);
 
     const [newPay, created] = await Pay.findOrCreate({
@@ -33,6 +31,7 @@ console.log(sanitizedPaymentId);
         paymentPlataform: paymentPlataform.toString(),
       },
     });
+console.log("llega aca");
 
     const user = await User.findByPk(userId);
     if (user) {
