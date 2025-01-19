@@ -5,7 +5,10 @@ const postPay = async ({ paymentPlataform, price, chips, userId, date, paymentId
 
   try {
     // Eliminar cualquier carácter que no sea un número del paymentId
-    const sanitizedPaymentId = paymentId.replace(/\D/g, ''); // \D coincide con todo lo que no es un dígito
+    const sanitizedPaymentId = typeof paymentId === 'string' 
+    ? paymentId.replace(/\D/g, '') // Solo números
+    : paymentId.toString().replace(/\D/g, ''); // Convierte a string y elimina letras
+   // \D coincide con todo lo que no es un dígito
 
     if (!sanitizedPaymentId) {
       throw new Error('El paymentId no contiene números válidos.');
