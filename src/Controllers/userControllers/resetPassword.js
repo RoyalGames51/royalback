@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 const nodemailer = require('nodemailer');
 const User = require('../../models/user'); // Asegúrate de que esta ruta sea la correcta para tu modelo de usuario
 
