@@ -31,6 +31,8 @@ const {
 } = require("../Handlers/favoriteHandlers"); 
 const createGameHandler = require("../Handlers/gameHandlers/createGameHandler");
 const capturePaypalOrder = require('../Controllers/PaypalControllers/paypalCapture');
+const { requestPasswordReset, resetPassword } = require('../Controllers/userControllers/resetPassword');
+
 
 
 
@@ -48,6 +50,9 @@ router.get('/user-nick',getUserByNickHandler)
 router.put('/inactivar-user',inactiveUserHandler)
 
 router.post('/send-mail', sendMailHandler)
+
+router.post('/password-reset/request', requestPasswordReset);// Ruta para solicitar el restablecimiento de contraseña
+router.post('/password-reset/reset', resetPassword);// Ruta para restablecer la contraseña
 
 router.get('/favorites/:userId', getFavoritesHandler); // Obtener juegos favoritos
 router.post('/favorites', addFavoriteHandler); // Agregar favorito
