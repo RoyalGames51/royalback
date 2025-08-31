@@ -5,9 +5,9 @@ const { Pool } = require('pg');
 
 const fs = require('fs');
 const path = require('path');
-const { 
+/* const { 
   DB_USER, DB_PASSWORD, DB_HOST,
-} = process.env;
+} = process.env; */
 
 const pool = new Pool({
   connectionString: process.env.DATABASE_URL
