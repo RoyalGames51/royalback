@@ -49,7 +49,7 @@ const createOrderMx = async (req, res) => {
          
       },
 
-      notification_url: "https://royalback-f340.onrender.com/mepago/webhook/mx",
+      notification_url: "https://royalback-1.onrender.com/mepago/webhook/mx",
 
 
       auto_return: "all"

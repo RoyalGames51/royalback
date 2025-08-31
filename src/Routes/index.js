@@ -1,4 +1,4 @@
-const {Router} = require('express');
+    const {Router} = require('express');
 const router = Router();
 
 const postUserHandler = require('../Handlers/userHandlers/postUserHandler')
