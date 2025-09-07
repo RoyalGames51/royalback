@@ -2,7 +2,7 @@
 const http = require("http");
 const app = require("./src/server");
 const { conn } = require("./src/database");
-const { setupChat } = require("./src/chat");
+const { setupChat } = require("./src/serverChat/server");
 
 const port = process.env.PORT || 3001;
 console.log("USING PORT:", port);
