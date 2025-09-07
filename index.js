@@ -28,9 +28,9 @@ async function ensureChatTable(sequelize) {
     await conn.sync({ force: false });
     await ensureChatTable(conn);
 
-    const httpServer = http.createServer(app);
+    const httpServer = http.createServer(app);    
 
-    // 👇 monta el WS /chat en el MISMO server/puerto
+    // 👇 monta el WS /chat en el MISMO s erver/puerto
     setupChat(httpServer, conn);
 
     httpServer.listen(port, () => {

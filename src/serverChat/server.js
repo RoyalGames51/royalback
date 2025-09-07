@@ -59,10 +59,12 @@ function setupChat(httpServer, db /* <- conn de Sequelize o un Pool de pg */, op
       if (!text) return;
 
       try {
-        await db.query(
-          `INSERT INTO chat_messages (user_id, nick, text) VALUES ($1, $2, $3)`,
-          { bind: [ws.user.id, ws.user.nick, text] }
-        );
+       await db.query(
+  `INSERT INTO chat_messages (user_id, nick, text, created_at)
+   VALUES ($1, $2, $3, NOW())`,
+  { bind: [ws.user.id, ws.user.nick, text] }
+);
+
       } catch (e) {
         console.error('Save error', e);
       }
