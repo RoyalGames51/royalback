@@ -1,24 +1,26 @@
-const express= require("express");
+// src/server.js
+const express = require("express");
 const morgan = require("morgan");
-const bodyParser = require('body-parser');
+const cors = require("cors");
+const bodyParser = require("body-parser");
+const router = require("./Routes/index");
 
+const app = express();
 
-const cors = require("cors")
+app.use(morgan("dev"));
+app.use(express.json());
+app.use(cors({
+  origin: [
+    'https://www.royalgames.me',
+    'http://localhost:5173',
+    'https://html-classic.itch.zone',
+    'https://royalgames51.itch.io/',
+    'https://itch.io/',
+    'https://html-classic.itch.zone/'
+  ]
+}));
+app.use(bodyParser.json());
 
-const router = require("./Routes/index"); 
+app.use(router);
 
-
-const server = express();
-
-server.use(morgan("dev"));
-server.use(express.json());
-
-server.use(cors({
-    origin: ['https://www.royalgames.me', 'http://localhost:5173','https://html-classic.itch.zone']
-  }));
-server.use(bodyParser.json()); 
-
-
-server.use(router);
-
-module.exports= server;
+module.exports = app;

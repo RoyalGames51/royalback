@@ -32,6 +32,7 @@ const {
 const createGameHandler = require("../Handlers/gameHandlers/createGameHandler");
 const capturePaypalOrder = require('../Controllers/PaypalControllers/paypalCapture');
 const { requestPasswordReset, resetPassword } = require('../Controllers/userControllers/resetPassword');
+const { getHistory, postMessage } = require('./chat');
 
 
 
@@ -85,5 +86,9 @@ router.post('/paypal/create-order', createPaypalOrder);
 router.post('/newpay',postPayHandler);
 router.post('/capture-paypal-order', capturePaypalOrder)
 //------------------------------------------
+
+//chat
+router.get("/chat/history", getHistory);
+router.post("/chat/send", postMessage);
 
 module.exports= router;
