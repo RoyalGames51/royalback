@@ -8,9 +8,41 @@ const sanitize = (s) => ('' + s).slice(0, 500).trim();
 function heartbeat() { this.isAlive = true; }
 
 function setupChat(httpServer, db /* <- conn de Sequelize o un Pool de pg */, opts = {}) {
+
   const wss = new WebSocketServer({ server: httpServer, path: '/chat' });
   const RATE_LIMIT_WINDOW_MS = 3000;
   const lastMessageAt = new Map(); // userId -> ts
+
+  // Dentro de setupChat(...)
+function currentUsers(wss) {
+  const map = new Map();
+  wss.clients.forEach(ws => {
+    if (ws.user) map.set(ws.user.id, { id: ws.user.id, nick: ws.user.nick });
+  });
+  return Array.from(map.values());
+}
+
+function broadcast(wss, obj) {
+  const data = JSON.stringify(obj);
+  wss.clients.forEach(c => { if (c.readyState === 1) c.send(data); });
+}
+
+function broadcastPresence(wss) {
+  broadcast(wss, { type: 'presence', users: currentUsers(wss) });
+}
+
+wss.on('connection', async (ws, req) => {
+  // ... tu código existente ...
+
+  // Enviá presencia al nuevo y a todos
+  ws.send(JSON.stringify({ type: 'presence', users: currentUsers(wss) }));
+  broadcastPresence(wss);
+
+  ws.on('close', () => {
+    broadcastPresence(wss);
+  });
+});
+
 
   wss.on('connection', async (ws, req) => {
     ws.isAlive = true;
@@ -104,5 +136,7 @@ function broadcast(wss, obj) {
     if (client.readyState === 1) client.send(data);
   });
 }
+
+
 
 module.exports = { setupChat };
