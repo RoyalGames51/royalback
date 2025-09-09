@@ -136,8 +136,7 @@ function broadcast(wss, obj) {
     if (client.readyState === 1) client.send(data);
   });
 }
-// en tu server WS
-function sanitize(s){ return (''+s).slice(0,40).trim() }
+
 
 function getPresence() {
   const users = [];
@@ -148,6 +147,10 @@ function getPresence() {
   });
   return { type: 'presence', users };
 }
+
+
+
+
 
 function broadcastPresence(){
   const msg = JSON.stringify(getPresence());
