@@ -136,6 +136,38 @@ function broadcast(wss, obj) {
     if (client.readyState === 1) client.send(data);
   });
 }
+// en tu server WS
+function sanitize(s){ return (''+s).slice(0,40).trim() }
+
+function getPresence() {
+  const users = [];
+  wss.clients.forEach(c => {
+    if (c.readyState === 1 && c.user) {
+      users.push({ id: c.user.id, nick: c.user.nick });
+    }
+  });
+  return { type: 'presence', users };
+}
+
+function broadcastPresence(){
+  const msg = JSON.stringify(getPresence());
+  wss.clients.forEach(c => { if (c.readyState === 1) c.send(msg); });
+}
+
+wss.on('connection', (ws, req) => {
+  const url = new URL(req.url, `http://${req.headers.host}`);
+  const jugadorID = sanitize(url.searchParams.get('jugadorID') || '');
+  const nickQ     = sanitize(url.searchParams.get('nick') || '');
+
+  // fallback seguro
+  ws.user = { id: jugadorID, nick: nickQ || 'Jugador' };
+
+  // tras conectar, emite la presencia correcta
+  broadcastPresence();
+
+  ws.on('close', () => broadcastPresence());
+});
+
 
 
 
